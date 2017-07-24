@@ -1,0 +1,133 @@
+﻿<UserControl x:Class="KeyPunchers.Views.KeyboardView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:KeyPunchers.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="1000" >
+    <Grid Background="White" ShowGridLines="True">
+        <Grid.Resources>
+            <Style TargetType="TextBlock">
+                <Setter Property="FontFamily" Value="Courier New"></Setter>
+                <Setter Property="FontSize" Value="25"/>
+                <Setter Property="TextWrapping" Value="Wrap"/>
+                <Setter Property="Margin" Value="10,3,6,3"/>
+                <Setter Property="VerticalAlignment" Value="Center"></Setter>
+            </Style>
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>  
+        
+        <Grid Grid.Row="0" ShowGridLines="True">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+            
+            <TextBlock Grid.Column="0" Text="~ ё ` Ё"></TextBlock>
+            <TextBlock Grid.Column="1" Text="!   1  "></TextBlock>
+            <TextBlock Grid.Column="2" Text='@ " 2  '></TextBlock>
+            <TextBlock Grid.Column="3" Text="# № 3  "></TextBlock>
+            <TextBlock Grid.Column="4" Text="$ ; 4  "></TextBlock>
+            <TextBlock Grid.Column="5" Text="%   5  "></TextBlock>
+            <TextBlock Grid.Column="6" Text="^ : 6  "></TextBlock>
+            <TextBlock Grid.Column="7" Text="&amp; ? 7  "></TextBlock>
+            <TextBlock Grid.Column="8" Text="* * 8  "></TextBlock>
+            <TextBlock Grid.Column="9" Text="(  9  "></TextBlock>
+            <TextBlock Grid.Column="10" Text=")   0  "></TextBlock>
+            <TextBlock Grid.Column="11" Text="_   -  "></TextBlock>
+            <TextBlock Grid.Column="12" Text="+   =  "></TextBlock>
+            <TextBlock Grid.Column="13" Text="← Backspase"></TextBlock>
+        </Grid>
+
+
+        <Grid Grid.Row="1" ShowGridLines="True">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1.5*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2.5*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Column="0" Text="Tab↹"></TextBlock>
+            <TextBlock Grid.Column="1" Text="Q   Й"></TextBlock>
+            <TextBlock Grid.Column="2" Text='W   Ц  '></TextBlock>
+            <TextBlock Grid.Column="3" Text="E   У  "></TextBlock>
+            <TextBlock Grid.Column="4" Text="R   К  "></TextBlock>
+            <TextBlock Grid.Column="5" Text="T   Е  "></TextBlock>
+            <TextBlock Grid.Column="6" Text="Y   Н  "></TextBlock>
+            <TextBlock Grid.Column="7" Text="U   Г  "></TextBlock>
+            <TextBlock Grid.Column="8" Text="I   Ш  "></TextBlock>
+            <TextBlock Grid.Column="9" Text="O   Щ  "></TextBlock>
+            <TextBlock Grid.Column="10" Text="P   З  "></TextBlock>
+            <TextBlock Grid.Column="11" Text=' { [Х '></TextBlock>
+            <TextBlock Grid.Column="12" Text="}  ] Ъ"></TextBlock>
+            <TextBlock Grid.Column="13" Text="|         \"></TextBlock>
+        </Grid>
+
+        <Grid Grid.Row="2" ShowGridLines="True">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1.9*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="3.2*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Column="0" Text="Caps Lock" FontSize="20" Margin="2"></TextBlock>
+            <TextBlock Grid.Column="1" Text="A   Ф"></TextBlock>
+            <TextBlock Grid.Column="2" Text='S   Ы  '></TextBlock>
+            <TextBlock Grid.Column="3" Text="D   В  "></TextBlock>
+            <TextBlock Grid.Column="4" Text="F   А  "></TextBlock>
+            <TextBlock Grid.Column="5" Text="G   П  "></TextBlock>
+            <TextBlock Grid.Column="6" Text="H   Р  "></TextBlock>
+            <TextBlock Grid.Column="7" Text="J   О  "></TextBlock>
+            <TextBlock Grid.Column="8" Text="K   Л  "></TextBlock>
+            <TextBlock Grid.Column="9" Text="L   Д  "></TextBlock>
+            <TextBlock Grid.Column="10" Text=":  ; Ж  "></TextBlock>
+
+
+            <TextBlock Grid.Column="11">" ' Э</TextBlock>
+            <TextBlock Grid.Column="12" Text="Enter ↵"></TextBlock>
+
+        </Grid>
+
+
+    </Grid>
+</UserControl>

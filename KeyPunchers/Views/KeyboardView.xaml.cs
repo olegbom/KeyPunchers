@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace KeyPunchers
+namespace KeyPunchers.Views
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Логика взаимодействия для KeyboardView.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class KeyboardView : UserControl
     {
-        public MainWindow()
+        public KeyboardView()
         {
             InitializeComponent();
         }
