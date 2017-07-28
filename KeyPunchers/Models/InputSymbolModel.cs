@@ -2,13 +2,13 @@
 
 namespace KeyPunchers.Models
 {
-    public class InputKeyboardSymbolModel
+    public class InputSymbolModel
     {
         public string Symbol;
         public DateTime Time;
         public bool Сorrectness;
 
-        public InputKeyboardSymbolModel(string symbol, DateTime time, bool сorrectness)
+        public InputSymbolModel(string symbol, DateTime time, bool сorrectness)
         {
             Symbol = symbol;
             Time = time;

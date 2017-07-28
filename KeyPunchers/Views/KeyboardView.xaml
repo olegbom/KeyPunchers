@@ -42,6 +42,9 @@
                 <ColumnDefinition Width="3*"/>
             </Grid.ColumnDefinitions>
             
+            <WrapPanel Grid.Column="0">
+                
+            </WrapPanel>
             <TextBlock Grid.Column="0" Text="~ ё ` Ё"></TextBlock>
             <TextBlock Grid.Column="1" Text="!   1  "></TextBlock>
             <TextBlock Grid.Column="2" Text='@ " 2  '></TextBlock>
@@ -50,7 +53,7 @@
             <TextBlock Grid.Column="5" Text="%   5  "></TextBlock>
             <TextBlock Grid.Column="6" Text="^ : 6  "></TextBlock>
             <TextBlock Grid.Column="7" Text="&amp; ? 7  "></TextBlock>
-            <TextBlock Grid.Column="8" Text="* * 8  "></TextBlock>
+            <TextBlock Grid.Column="8" Text="*   8  "></TextBlock>
             <TextBlock Grid.Column="9" Text="(  9  "></TextBlock>
             <TextBlock Grid.Column="10" Text=")   0  "></TextBlock>
             <TextBlock Grid.Column="11" Text="_   -  "></TextBlock>

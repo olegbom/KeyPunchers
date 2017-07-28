@@ -1,18 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.IO;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using KeyPunchers.Models;
 using KeyPunchers.ViewModels;
 using Microsoft.Win32;
 
@@ -60,8 +48,9 @@ namespace KeyPunchers
 
         private void HanleKeystroke(string text)
         {
-            ViewModel.InputSymbol(text);
-           
+            var firstLineEnd = TextBlock.GetFirtsLineEndPosition();
+            ViewModel.InputSymbol(text, firstLineEnd);
+
         }
 
         private void MenOpenFile_OnClick(object sender, RoutedEventArgs e)

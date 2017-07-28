@@ -72,12 +72,12 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="BindableTextBlock.cs" />
-    <Compile Include="LinqToVisualTree.cs" />
-    <Compile Include="Models\InputKeyboardSymbolModel.cs" />
+    <Compile Include="Models\InputSymbolModel.cs" />
     <Compile Include="Properties\Annotations.cs" />
-    <Compile Include="ScrollOffsetBinding.cs" />
+    <Compile Include="ViewModels\KeyboardViewModel.cs" />
+    <Compile Include="ViewModels\KeyViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\TextUtils.cs" />
     <Compile Include="Views\KeyboardView.xaml.cs">
       <DependentUpon>KeyboardView.xaml</DependentUpon>
     </Compile>

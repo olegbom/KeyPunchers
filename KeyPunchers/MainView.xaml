@@ -11,7 +11,9 @@
     <Window.DataContext>
        <viewModels:MainViewModel></viewModels:MainViewModel>
     </Window.DataContext>
-    
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="VisibilityConverter"></BooleanToVisibilityConverter>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -31,22 +33,22 @@
             <MenuItem Header="Тренировка"/>
         </Menu>
 
-        <ScrollViewer Grid.Row="1" 
-                      Grid.ColumnSpan="3" 
-                      Grid.Column="0"
-                      local:ScrollViewerBinding.VerticalOffset="{Binding TextVerticalOffset}">
-            <TextBlock VerticalAlignment="Stretch"
-                       Margin="2"
-                       FontFamily="Courier New"
-                       FontSize="16" TextWrapping="WrapWithOverflow">
+
+        <Border  Grid.Row="1" 
+                 Grid.ColumnSpan="3" 
+                 Grid.Column="0" BorderThickness="1" BorderBrush="Black">
+
+
+            <TextBlock x:Name="TextBlock" Background="Beige" 
+                VerticalAlignment="Stretch" 
+                FontFamily="Courier New"
+                FontSize="24" TextWrapping="Wrap">
                 <TextBlock.Inlines>
-                    <Run Text="{Binding TextBefore, Mode=OneWay}" Foreground="DarkGray"/>
-                    <Underline Foreground="Black">
+                    <Run Text="{Binding TextBefore, Mode=OneWay}" Foreground="DarkGray"/><Underline Foreground="Black">
                         <Underline.Inlines>
                             <Run Text="{Binding CurrentSymbol, Mode=OneWay}"></Run>
                         </Underline.Inlines>
-                    </Underline>
-                    <Run Text="{Binding TextAfter, Mode=OneWay}" Foreground="Brown"/>
+                    </Underline><Run Text="{Binding TextAfter, Mode=OneWay}" Foreground="Brown"/>
                 </TextBlock.Inlines>
 
                 <TextBlock.ContextMenu>
@@ -55,25 +57,49 @@
                     </ContextMenu>
                 </TextBlock.ContextMenu>
             </TextBlock>
-        </ScrollViewer>
-        
-       
+            
+        </Border>
+        <StackPanel Background="Wheat"
+                    Grid.Row="1" 
+                    Grid.ColumnSpan="3" 
+                    Grid.Column="0" Visibility="{Binding Finish, Converter={StaticResource VisibilityConverter}}">
+            <StackPanel.Resources>
+                <Style TargetType="TextBlock">
+                    <Setter Property="FontSize" Value="20"/>
+                </Style>
+            </StackPanel.Resources>
+            <TextBlock Text="{Binding CorrectSymbolsCount, StringFormat={}Всего набрано: {0} символов}"/>
+            <TextBlock>
+                <TextBlock.Text>
+                    <MultiBinding StringFormat="{}Всего времени: {0:00}:{1:00;00}">
+                        <Binding Path="FullTime.Minutes" />
+                        <Binding Path="FullTime.Seconds" />
+                    </MultiBinding>
+                </TextBlock.Text>
+            </TextBlock>
+            <TextBlock Text="{Binding Сorrectness, StringFormat={}Правильно набрано: {0:P}}"/>
+            <TextBlock Text="{Binding FullSpeed, StringFormat={}Скорость набора: {0:F2} зн./мин}"/>
+        </StackPanel>
 
-        <oxy:Plot Grid.Row="2"  Grid.Column="0" Grid.ColumnSpan="3" >
+
+        <oxy:Plot Grid.Row="2"  Grid.Column="0" Grid.ColumnSpan="3" Background="Beige">
             <oxy:Plot.Axes>
-                <oxy:LinearAxis Title="Скорость, зн./мин" Position="Left" MajorGridlineStyle="Solid"/>
-                <oxy:DateTimeAxis Title="Время" StringFormat="mm:ss" Position="Bottom" MajorGridlineStyle="Solid" />
+                <oxy:LinearAxis Title="Скорость, зн./мин" Position="Left" MajorGridlineStyle="Solid" MinorGridlineStyle="Dash" Minimum="0" Maximum="400"/>
+                <oxy:TimeSpanAxis Title="Время" StringFormat="mm:ss" Position="Bottom" MajorGridlineStyle="Solid" MinorGridlineStyle="Dash"/>
             </oxy:Plot.Axes>
             <oxy:Plot.Series>
                 <oxy:LineSeries ItemsSource="{Binding SpeedData}"></oxy:LineSeries>
             </oxy:Plot.Series>
         </oxy:Plot>
 
-        <TextBlock Grid.Row="3" Grid.Column="0" Text="{Binding Сorrectness, StringFormat=P}" HorizontalAlignment="Center"/>
+        
+        
+        <TextBlock Grid.Row="3" Grid.Column="0" Text="{Binding Сorrectness, StringFormat={}Правильность {0:P}}" HorizontalAlignment="Center"/>
+        <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding TextVerticalOffset, Mode=OneWay}" HorizontalAlignment="Center"/>
 
-        <TextBlock Grid.Row="3" Grid.Column="2">
+        <TextBlock Grid.Row="3" Grid.Column="2" HorizontalAlignment="Center">
             <TextBlock.Text>
-                <MultiBinding StringFormat="{}{0:00}:{1:00;00}">
+                <MultiBinding StringFormat="{}Времени прошло: {0:00}:{1:00;00}">
                     <Binding Path="TypingDateTime.Minutes" />
                     <Binding Path="TypingDateTime.Seconds" />
                 </MultiBinding>

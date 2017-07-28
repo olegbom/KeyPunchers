@@ -3,9 +3,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Windows;
-using System.Windows.Documents;
-using System.Windows.Media;
 using System.Windows.Threading;
 using KeyPunchers.Models;
 using OxyPlot;
@@ -19,29 +16,37 @@ namespace KeyPunchers.ViewModels
         public event PropertyChangedEventHandler PropertyChanged;
 
 
-        public string Text { get; private set; } = @"dfsdafafdsafsa";
+        public string Text { get; private set; } = @"рпаырпавырпаврпавр";
 
         public int CurrentSymbolIndex { get; private set; } = 0;
 
-        public double TextVerticalOffset => (double)Text.Length / CurrentSymbolIndex;
+        public double TextVerticalOffset { get; set; }
 
-        public string TextBefore => Text.Substring(0, CurrentSymbolIndex);
-        public string TextAfter  => Text.Substring(CurrentSymbolIndex+1, Text.Length - CurrentSymbolIndex-1);
-        public string CurrentSymbol => Text[CurrentSymbolIndex].ToString();
+        public bool Finish { get; set; }
+
+        public string TextBefore => Finish ? Text : Text.Substring(0, CurrentSymbolIndex);
+        public string TextAfter  => Finish ? " " : Text.Substring(CurrentSymbolIndex+1, Text.Length - CurrentSymbolIndex-1);
+        public string CurrentSymbol => Finish? " " : Text[CurrentSymbolIndex].ToString();
 
         public double Сorrectness { get; set; }
+        
+        public double FullSpeed { get; private set; }
+
+        public int CorrectSymbolsCount { get; private set; }
+
+        public TimeSpan FullTime { get; private set; }
         public DateTime StartTime { get; private set; }
         public DateTime CurrentTime { get; private set; }
 
         public TimeSpan TypingDateTime => CurrentTime - StartTime;
 
-        public bool Finish { get; set; }
+       
 
         public ObservableCollection<DataPoint> SpeedData { get; } = new ObservableCollection<DataPoint>();
 
 
-        public List<InputKeyboardSymbolModel> InputKeyboardSymbolModels { get; }= new List<InputKeyboardSymbolModel>();
-        public List<InputKeyboardSymbolModel> CorrectInputKeyboardSymbolModels { get; } = new List<InputKeyboardSymbolModel>();
+        public List<InputSymbolModel> InputKeyboardSymbolModels { get; }= new List<InputSymbolModel>();
+        public List<InputSymbolModel> CorrectInputKeyboardSymbolModels { get; } = new List<InputSymbolModel>();
 
         public MainViewModel()
         {
@@ -60,7 +65,7 @@ namespace KeyPunchers.ViewModels
                     var span = CorrectInputKeyboardSymbolModels[count - 1].Time - CorrectInputKeyboardSymbolModels[i].Time;
                     if (span.TotalMilliseconds > 5000)
                     {
-                        SpeedData.Add(new DataPoint(DateTimeAxis.ToDouble(DateTime.Now), (count - 1 - i) / span.TotalMinutes));
+                        SpeedData.Add(new DataPoint(TimeSpanAxis.ToDouble(CurrentTime - StartTime), (count - 1 - i) / span.TotalMinutes));
                         while(SpeedData.Count > 60) SpeedData.RemoveAt(0);
                         break;
                     }
@@ -71,12 +76,12 @@ namespace KeyPunchers.ViewModels
         }
 
 
-        public void InputSymbol(string text)
+        public void InputSymbol(string text, int firstLineEnd)
         {
             if (Finish) return; 
 
             bool correctness = CurrentSymbol.Equals(text);
-            var model = new InputKeyboardSymbolModel(text, DateTime.Now, correctness);
+            var model = new InputSymbolModel(text, DateTime.Now, correctness);
             InputKeyboardSymbolModels.Add(model);
 
             int count = InputKeyboardSymbolModels.Count;
@@ -89,8 +94,23 @@ namespace KeyPunchers.ViewModels
             if (correctness)
             {
                 CorrectInputKeyboardSymbolModels.Add(model);
-                if (CurrentSymbolIndex == Text.Length - 1) Finish = true; 
-                else CurrentSymbolIndex++;
+                if (CurrentSymbolIndex == Text.Length - 1)
+                {
+                    FullTime = InputKeyboardSymbolModels.Last().Time - InputKeyboardSymbolModels.First().Time;
+                    CorrectSymbolsCount = CorrectInputKeyboardSymbolModels.Count;
+                    FullSpeed = CorrectSymbolsCount / FullTime.TotalMinutes;
+                    
+                    Finish = true;
+                }
+                else
+                {
+                    CurrentSymbolIndex++;
+                    if (CurrentSymbolIndex >= firstLineEnd - 3)
+                    {
+                        Text = Text.Substring(CurrentSymbolIndex);
+                        CurrentSymbolIndex = 0;
+                    }
+                }
             }
 
         }
@@ -99,12 +119,18 @@ namespace KeyPunchers.ViewModels
 
         public void SetText(string text)
         {
+            text = text.Replace('–', '-');
+            text = text.Replace('—', '-');
+            text = text.Replace("\n", "");
+            while(text.Contains("\r\r")) text = text.Replace("\r\r", "\r");
+            
             StartTime = DateTime.Now;
+            Text = text;
+            CurrentSymbolIndex = 0;
             Finish = false;
             InputKeyboardSymbolModels.Clear();
             CorrectInputKeyboardSymbolModels.Clear();
-            Text = text;
-            CurrentSymbolIndex = 0;
+            
         }
         
     }
