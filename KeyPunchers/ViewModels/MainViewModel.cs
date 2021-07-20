@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Text;
+using System.Windows.Controls;
 using System.Windows.Threading;
 using KeyPunchers.Models;
 using OxyPlot;
@@ -31,8 +33,10 @@ namespace KeyPunchers.ViewModels
         public double Сorrectness { get; set; }
         
         public double FullSpeed { get; private set; }
-
+        
         public int CorrectSymbolsCount { get; private set; }
+
+        public string BadKeysSummary { get; private set; } = "";
 
         public TimeSpan FullTime { get; private set; }
         public DateTime StartTime { get; private set; }
@@ -76,6 +80,7 @@ namespace KeyPunchers.ViewModels
         }
 
 
+
         public void InputSymbol(string text, int firstLineEnd)
         {
             if (Finish) return; 
@@ -99,16 +104,42 @@ namespace KeyPunchers.ViewModels
                     FullTime = InputKeyboardSymbolModels.Last().Time - InputKeyboardSymbolModels.First().Time;
                     CorrectSymbolsCount = CorrectInputKeyboardSymbolModels.Count;
                     FullSpeed = CorrectSymbolsCount / FullTime.TotalMinutes;
-                    
                     Finish = true;
+                    Dictionary<string, int> errorsDict = new Dictionary<string, int>();
+                    int numberOfConsecutiveErrors = 0;
+                    for (int i = 0; i < InputKeyboardSymbolModels.Count; i++)
+                    {
+                        if (!InputKeyboardSymbolModels[i].Сorrectness)
+                        {
+                            numberOfConsecutiveErrors++;
+                        }
+                        else if(numberOfConsecutiveErrors != 0)
+                        {
+                            string symbol = InputKeyboardSymbolModels[i].Symbol;
+                            if (!errorsDict.ContainsKey(symbol))
+                                errorsDict[symbol] = numberOfConsecutiveErrors;
+                            else
+                                errorsDict[symbol] += numberOfConsecutiveErrors;
+                            numberOfConsecutiveErrors = 0;
+                        }
+                    }
+                    
+                    StringBuilder sb = new StringBuilder();
+                    foreach (var pairs in errorsDict.OrderBy(p => -p.Value))
+                    {
+                        sb.AppendLine($"{pairs.Key}: {pairs.Value}");
+                    }
+
+                    BadKeysSummary = sb.ToString();
                 }
                 else
                 {
                     CurrentSymbolIndex++;
                     if (CurrentSymbolIndex >= firstLineEnd - 3)
                     {
-                        Text = Text.Substring(CurrentSymbolIndex);
+                        int buff = CurrentSymbolIndex;
                         CurrentSymbolIndex = 0;
+                        Text = Text.Substring(buff);
                     }
                 }
             }
@@ -130,7 +161,6 @@ namespace KeyPunchers.ViewModels
             Finish = false;
             InputKeyboardSymbolModels.Clear();
             CorrectInputKeyboardSymbolModels.Clear();
-            
         }
         
     }

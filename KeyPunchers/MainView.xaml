@@ -79,6 +79,12 @@
             </TextBlock>
             <TextBlock Text="{Binding Сorrectness, StringFormat={}Правильно набрано: {0:P}}"/>
             <TextBlock Text="{Binding FullSpeed, StringFormat={}Скорость набора: {0:F2} зн./мин}"/>
+            <TextBlock Text="{Binding BadKeysSummary}"/>
+            <StackPanel.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Вставить текст" Click="ContextPaste_OnClick"></MenuItem>
+                </ContextMenu>
+            </StackPanel.ContextMenu>
         </StackPanel>
 
 

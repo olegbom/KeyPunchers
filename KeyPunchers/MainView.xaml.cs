@@ -37,16 +37,16 @@ namespace KeyPunchers
             // stop event processing here
             args.Handled = true;
             // this is my internal method for handling a keystroke
-            HanleKeystroke(" ");
+            HandleKeystroke(" ");
         }
 
         private void PreviewTextInputHandler(object sender,
             TextCompositionEventArgs e)
         {
-            HanleKeystroke(e.Text);
+            HandleKeystroke(e.Text);
         }
 
-        private void HanleKeystroke(string text)
+        private void HandleKeystroke(string text)
         {
             var firstLineEnd = TextBlock.GetFirtsLineEndPosition();
             ViewModel.InputSymbol(text, firstLineEnd);
