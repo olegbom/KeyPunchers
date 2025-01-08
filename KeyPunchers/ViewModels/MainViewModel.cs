@@ -9,6 +9,7 @@ using System.Windows.Threading;
 using KeyPunchers.Models;
 using OxyPlot;
 using OxyPlot.Axes;
+using OxyPlot.Series;
 
 namespace KeyPunchers.ViewModels
 {
@@ -44,8 +45,8 @@ namespace KeyPunchers.ViewModels
 
         public TimeSpan TypingDateTime => CurrentTime - StartTime;
 
-       
 
+        public PlotModel PlotModel { get; private set; } = new PlotModel();
         public ObservableCollection<DataPoint> SpeedData { get; } = new ObservableCollection<DataPoint>();
 
 
@@ -54,6 +55,26 @@ namespace KeyPunchers.ViewModels
 
         public MainViewModel()
         {
+            PlotModel.Axes.Add(new LinearAxis()
+            {
+                Title = "Скорость, зн./мин",
+                Position = AxisPosition.Left,
+                MajorGridlineStyle = LineStyle.Solid,
+                MinorGridlineStyle = LineStyle.Dash,
+                Minimum = 0,
+                Maximum = 300,
+            });
+            PlotModel.Axes.Add(new TimeSpanAxis()
+            {
+                Title = "Время",
+                StringFormat = "mm:ss",
+                Position = AxisPosition.Bottom,
+                MajorGridlineStyle = LineStyle.Solid,
+                MinorGridlineStyle = LineStyle.Dash
+            });
+
+            PlotModel.Series.Add(new LineSeries(){ItemsSource = SpeedData });
+
             StartTime = DateTime.Now;
             CurrentTime = StartTime;
             DispatcherTimer timer = new DispatcherTimer();
@@ -74,6 +95,7 @@ namespace KeyPunchers.ViewModels
                         break;
                     }
                 }
+                PlotModel.InvalidatePlot(true);
             };
             timer.Start();
             

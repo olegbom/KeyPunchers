@@ -110,7 +110,7 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="3.2*"/>
+                <ColumnDefinition Width="3.1*"/>
             </Grid.ColumnDefinitions>
 
             <TextBlock Grid.Column="0" Text="Caps Lock" FontSize="20" Margin="2"></TextBlock>
@@ -124,13 +124,57 @@
             <TextBlock Grid.Column="8" Text="K   Л  "></TextBlock>
             <TextBlock Grid.Column="9" Text="L   Д  "></TextBlock>
             <TextBlock Grid.Column="10" Text=":  ; Ж  "></TextBlock>
-
-
             <TextBlock Grid.Column="11">" ' Э</TextBlock>
             <TextBlock Grid.Column="12" Text="Enter ↵"></TextBlock>
-
         </Grid>
-
-
+        <Grid Grid.Row="3" ShowGridLines="True">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2.3*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="3.7*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0" Text="🡅Shift"></TextBlock>
+            <TextBlock Grid.Column="1" Text="Z   Я   "></TextBlock>
+            <TextBlock Grid.Column="2" Text="X   Ч   "></TextBlock>
+            <TextBlock Grid.Column="3" Text="C   С   "></TextBlock>
+            <TextBlock Grid.Column="4" Text="V   М   "></TextBlock>
+            <TextBlock Grid.Column="5" Text="B   И   "></TextBlock>
+            <TextBlock Grid.Column="6" Text="N   Т   "></TextBlock>
+            <TextBlock Grid.Column="7" Text="M   Ь   "></TextBlock>
+            <TextBlock Grid.Column="8" Text="&lt;  , Б"></TextBlock>
+            <TextBlock Grid.Column="9" Text="&gt;  . Ю"></TextBlock>
+            <TextBlock Grid.Column="10" Text="? ,/ ."></TextBlock>
+            <TextBlock Grid.Column="11" Text="🡅Shift"></TextBlock>
+            
+        </Grid>
+        <Grid Grid.Row="4" ShowGridLines="True">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1.3*"/>
+                <ColumnDefinition Width="1.3*"/>
+                <ColumnDefinition Width="1.3*"/>
+                <ColumnDefinition Width="6.9*"/>
+                <ColumnDefinition Width="1.3*"/>
+                <ColumnDefinition Width="1.3*"/>
+                <ColumnDefinition Width="1.3*"/>
+                <ColumnDefinition Width="1.3*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0" Text="Ctrl"></TextBlock>
+            <TextBlock Grid.Column="1" Text="Win"></TextBlock>
+            <TextBlock Grid.Column="2" Text="Alt"></TextBlock>
+            <TextBlock Grid.Column="3" Text=""></TextBlock>
+            <TextBlock Grid.Column="4" Text="Alt"></TextBlock>
+            <TextBlock Grid.Column="5" Text="Win"></TextBlock>
+            <TextBlock Grid.Column="6" Text="Menu"></TextBlock>
+            <TextBlock Grid.Column="7" Text="Ctrl"></TextBlock>
+        </Grid>
     </Grid>
 </UserControl>

@@ -4,8 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KeyPunchers"
-        xmlns:oxy="http://oxyplot.org/wpf"
+        xmlns:oxy="clr-namespace:OxyPlot.Wpf;assembly=OxyPlot.Wpf"
         xmlns:viewModels="clr-namespace:KeyPunchers.ViewModels"
+        xmlns:axes="clr-namespace:OxyPlot.Axes;assembly=OxyPlot"
+        xmlns:series="clr-namespace:OxyPlot.Series;assembly=OxyPlot"
         mc:Ignorable="d"
         Title="MainView" Height="600" Width="800">
     <Window.DataContext>
@@ -88,15 +90,8 @@
         </StackPanel>
 
 
-        <oxy:Plot Grid.Row="2"  Grid.Column="0" Grid.ColumnSpan="3" Background="Beige">
-            <oxy:Plot.Axes>
-                <oxy:LinearAxis Title="Скорость, зн./мин" Position="Left" MajorGridlineStyle="Solid" MinorGridlineStyle="Dash" Minimum="0" Maximum="400"/>
-                <oxy:TimeSpanAxis Title="Время" StringFormat="mm:ss" Position="Bottom" MajorGridlineStyle="Solid" MinorGridlineStyle="Dash"/>
-            </oxy:Plot.Axes>
-            <oxy:Plot.Series>
-                <oxy:LineSeries ItemsSource="{Binding SpeedData}"></oxy:LineSeries>
-            </oxy:Plot.Series>
-        </oxy:Plot>
+        <oxy:PlotView Grid.Row="2" Model="{Binding PlotModel}" Grid.Column="0" Grid.ColumnSpan="3" Background="Beige">
+        </oxy:PlotView>
 
         
         
