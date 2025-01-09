@@ -91,7 +91,7 @@
             <TextBlock Grid.Column="8" Text="I   Ш  "></TextBlock>
             <TextBlock Grid.Column="9" Text="O   Щ  "></TextBlock>
             <TextBlock Grid.Column="10" Text="P   З  "></TextBlock>
-            <TextBlock Grid.Column="11" Text=' { [Х '></TextBlock>
+            <TextBlock Grid.Column="11" Text="{}{  [ Х"></TextBlock>
             <TextBlock Grid.Column="12" Text="}  ] Ъ"></TextBlock>
             <TextBlock Grid.Column="13" Text="|         \"></TextBlock>
         </Grid>

@@ -105,20 +105,23 @@ namespace KeyPunchers.ViewModels
 
         public void InputSymbol(string text, int firstLineEnd)
         {
-            if (Finish) return; 
+            if (Finish) return;
 
-            bool correctness = CurrentSymbol.Equals(text);
-            var model = new InputSymbolModel(text, DateTime.Now, correctness);
+            if (text.Equals("\r"))
+                text = "\n";
+
+            bool isCorrect = CurrentSymbol.Equals(text);
+            var model = new InputSymbolModel(text, DateTime.Now, isCorrect);
             InputKeyboardSymbolModels.Add(model);
 
             int count = InputKeyboardSymbolModels.Count;
             if (count > 1)
             {
-                var correctnessCount = (double)InputKeyboardSymbolModels.Count(x => x.Сorrectness);
+                var correctnessCount = (double)InputKeyboardSymbolModels.Count(x => x.IsСorrect);
                 Сorrectness = correctnessCount / InputKeyboardSymbolModels.Count;
             }
             
-            if (correctness)
+            if (isCorrect)
             {
                 CorrectInputKeyboardSymbolModels.Add(model);
                 if (CurrentSymbolIndex == Text.Length - 1)
@@ -131,7 +134,7 @@ namespace KeyPunchers.ViewModels
                     int numberOfConsecutiveErrors = 0;
                     for (int i = 0; i < InputKeyboardSymbolModels.Count; i++)
                     {
-                        if (!InputKeyboardSymbolModels[i].Сorrectness)
+                        if (!InputKeyboardSymbolModels[i].IsСorrect)
                         {
                             numberOfConsecutiveErrors++;
                         }
@@ -167,22 +170,21 @@ namespace KeyPunchers.ViewModels
             }
 
         }
-
-     
-
+        
         public void SetText(string text)
         {
             text = text.Replace('–', '-');
             text = text.Replace('—', '-');
-            text = text.Replace("\n", "");
-            while(text.Contains("\r\r")) text = text.Replace("\r\r", "\r");
+            text = text.Replace(Environment.NewLine, "\n");
             
             StartTime = DateTime.Now;
             Text = text;
             CurrentSymbolIndex = 0;
             Finish = false;
+            SpeedData.Clear();
             InputKeyboardSymbolModels.Clear();
             CorrectInputKeyboardSymbolModels.Clear();
+            PlotModel.InvalidatePlot(true);
         }
         
     }

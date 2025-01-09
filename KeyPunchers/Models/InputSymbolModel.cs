@@ -6,13 +6,13 @@ namespace KeyPunchers.Models
     {
         public string Symbol;
         public DateTime Time;
-        public bool Сorrectness;
+        public bool IsСorrect;
 
-        public InputSymbolModel(string symbol, DateTime time, bool сorrectness)
+        public InputSymbolModel(string symbol, DateTime time, bool isСorrect)
         {
             Symbol = symbol;
             Time = time;
-            Сorrectness = сorrectness;
+            IsСorrect = isСorrect;
         }
     }
 }
